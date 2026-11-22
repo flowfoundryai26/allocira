@@ -1,0 +1,273 @@
+diff --git a/package.json b/package.json
+--- a/package.json
++++ b/package.json
+@@ -1,5 +1,5 @@
+ {
+-  "name": "partnerledger",
++  "name": "allocira",
+   "version": "0.1.0",
+   "private": true,
+   "scripts": {
+diff --git a/public/images/CREDITS.md b/public/images/CREDITS.md
+--- a/public/images/CREDITS.md
++++ b/public/images/CREDITS.md
+@@ -1,4 +1,4 @@
+-# PartnerLedger stock photography
++# Allocira stock photography
+ 
+ These photographs illustrate places and roles in law-firm finance. They are distributed under the [Unsplash License](https://unsplash.com/license).
+ 
+diff --git a/src/app/layout.tsx b/src/app/layout.tsx
+--- a/src/app/layout.tsx
++++ b/src/app/layout.tsx
+@@ -20,11 +20,11 @@
+ 
+ export const metadata: Metadata = {
+   metadataBase: new URL(baseUrl),
+-  title: "PartnerLedger | LLP Partner Finance & Payout Management",
++  title: "Allocira | LLP Partner Finance & Payout Management",
+   description:
+-    "Explore PartnerLedger, a proposed financial management platform for law firm LLPs. Simplify billable hours, expense allocation, partner profit-sharing and payout reporting. Join the early-access waitlist.",
++    "Explore Allocira, a proposed financial management platform for law firm LLPs. Simplify billable hours, expense allocation, partner profit-sharing and payout reporting. Join the early-access waitlist.",
+   openGraph: {
+-    title: "PartnerLedger | LLP Partner Finance & Payout Management",
++    title: "Allocira | LLP Partner Finance & Payout Management",
+     description:
+       "A proposed partner finance platform for law firm LLPs. Explore the concept and join early access.",
+     type: "website",
+@@ -32,7 +32,7 @@
+   },
+   twitter: {
+     card: "summary_large_image",
+-    title: "PartnerLedger | LLP Partner Finance & Payout Management",
++    title: "Allocira | LLP Partner Finance & Payout Management",
+     description:
+       "Explore the proposed platform for clearer law firm partner finances.",
+   },
+diff --git a/src/app/page.tsx b/src/app/page.tsx
+--- a/src/app/page.tsx
++++ b/src/app/page.tsx
+@@ -144,11 +144,11 @@
+ 
+ const faqs = [
+   [
+-    "What is PartnerLedger?",
++    "What is Allocira?",
+     "A proposed financial workflow platform for tracking and managing partner-level earnings, expenses and payouts in law firm LLPs.",
+   ],
+   [
+-    "Is PartnerLedger available today?",
++    "Is Allocira available today?",
+     "Not yet. It is in the research and validation stage.",
+   ],
+   [
+@@ -168,7 +168,7 @@
+     "The public waitlist collects registration and feedback details, not confidential client files or firm financial records. Any future financial platform will require a separate security and data protection design.",
+   ],
+   [
+-    "When will PartnerLedger launch?",
++    "When will Allocira launch?",
+     "No public launch date has been announced.",
+   ],
+   [
+@@ -214,13 +214,13 @@
+               </div>
+             </Reveal>
+             <Reveal delay={0.08}>
+-              <p className="eyebrow mb-4">About PartnerLedger</p>
++              <p className="eyebrow mb-4">About Allocira</p>
+               <h2 className="section-title max-w-xl">
+                 Built for the Financial Realities of Modern Law Firms
+               </h2>
+               <p className="section-copy mt-7">
+                 Different LLPs may use different compensation structures,
+-                expense-sharing arrangements and payout processes. PartnerLedger
++                expense-sharing arrangements and payout processes. Allocira
+                 is being explored to make those workflows clearer without
+                 requiring firms to change their entire accounting ecosystem.
+               </p>
+@@ -232,7 +232,7 @@
+                   </h3>
+                 </div>
+                 <p className="mt-3 text-sm leading-7 text-slate-300">
+-                  PartnerLedger is an initiative by FlowFoundry AI Solutions, an
++                  Allocira is an initiative by FlowFoundry AI Solutions, an
+                   AI automation and custom software development company focused
+                   on solving practical business problems.
+                 </p>
+@@ -487,7 +487,7 @@
+             </div>
+             <p className="mt-4 text-xs text-slate-400">
+               Images are illustrative stock photography and do not depict
+-              PartnerLedger customers.
++              Allocira customers.
+             </p>
+           </div>
+         </section>
+@@ -522,7 +522,7 @@
+                   Help Shape the Future of Partner Finance Management
+                 </h2>
+                 <p className="section-copy mt-6">
+-                  We&apos;re exploring PartnerLedger with legal professionals.
++                  We&apos;re exploring Allocira with legal professionals.
+                   Join the early-access waitlist to receive product updates,
+                   opportunities to review prototypes and invitations to future
+                   pilot testing.
+diff --git a/src/components/brand.tsx b/src/components/brand.tsx
+--- a/src/components/brand.tsx
++++ b/src/components/brand.tsx
+@@ -9,7 +9,7 @@
+       </span>
+       <span>
+         <strong>
+-          Partner<span>Ledger</span>
++          Allo<span>cira</span>
+         </strong>
+         {!compact && <small>by FlowFoundry AI Solutions</small>}
+       </span>
+diff --git a/src/components/dashboard-preview.tsx b/src/components/dashboard-preview.tsx
+--- a/src/components/dashboard-preview.tsx
++++ b/src/components/dashboard-preview.tsx
+@@ -306,7 +306,7 @@
+           </div>
+           <div>
+             <p className="text-sm font-semibold tracking-tight">
+-              PartnerLedger{" "}
++              Allocira{" "}
+               <span className="font-normal text-slate-400">/ Finance</span>
+             </p>
+             <p className="text-[11px] text-slate-400">
+diff --git a/src/components/hero.tsx b/src/components/hero.tsx
+--- a/src/components/hero.tsx
++++ b/src/components/hero.tsx
+@@ -208,7 +208,7 @@
+             place.
+           </p>
+           <p className="hero-detail">
+-            Every LLP operates differently. PartnerLedger is being designed to
++            Every LLP operates differently. Allocira is being designed to
+             adapt to your firm&apos;s financial arrangements, rather than
+             forcing you into a fixed system.
+           </p>
+diff --git a/src/components/legal-shell.tsx b/src/components/legal-shell.tsx
+--- a/src/components/legal-shell.tsx
++++ b/src/components/legal-shell.tsx
+@@ -16,7 +16,7 @@
+       <SiteHeader />
+       <main className="container-shell max-w-[900px] py-20 sm:py-28">
+         <Link href="/" className="text-sm font-medium text-[#a9c9ff] underline">
+-          Back to PartnerLedger
++          Back to Allocira
+         </Link>
+         <h1 className="section-title mt-8">{title}</h1>
+         <p className="mt-4 text-sm text-slate-400">Last updated: {updated}</p>
+diff --git a/src/components/site-footer.tsx b/src/components/site-footer.tsx
+--- a/src/components/site-footer.tsx
++++ b/src/components/site-footer.tsx
+@@ -59,7 +59,7 @@
+         <div className="container-shell flex flex-col gap-3 py-6 text-xs leading-6 text-slate-400 md:flex-row md:items-center md:justify-between">
+           <span>© 2026 FlowFoundry AI Solutions. All rights reserved.</span>
+           <span id="disclaimer">
+-            PartnerLedger is a proposed software product. It does not provide
++            Allocira is a proposed software product. It does not provide
+             accounting, tax or legal advice.
+           </span>
+         </div>
+diff --git a/src/components/site-header.tsx b/src/components/site-header.tsx
+--- a/src/components/site-header.tsx
++++ b/src/components/site-header.tsx
+@@ -39,7 +39,7 @@
+           href="/#home"
+           className="flex shrink-0 items-center gap-3"
+           onClick={() => setOpen(false)}
+-          aria-label="PartnerLedger home"
++          aria-label="Allocira home"
+         >
+           <Brand />
+         </a>
+diff --git a/src/components/waitlist-form.tsx b/src/components/waitlist-form.tsx
+--- a/src/components/waitlist-form.tsx
++++ b/src/components/waitlist-form.tsx
+@@ -72,7 +72,7 @@
+       onSubmit={handleSubmit(submit)}
+       noValidate
+       className="grid gap-5"
+-      aria-label="Join the PartnerLedger waitlist"
++      aria-label="Join the Allocira waitlist"
+     >
+       <div className="grid gap-5 sm:grid-cols-2">
+         <div>
+@@ -230,7 +230,7 @@
+               Privacy Notice
+             </Link>{" "}
+             and consent to my details being used to contact me about
+-            PartnerLedger&apos;s development and early-access opportunities.
++            Allocira&apos;s development and early-access opportunities.
+           </span>
+         </label>
+         {errors.privacyConsent && (
+diff --git a/src/app/privacy/page.tsx b/src/app/privacy/page.tsx
+--- a/src/app/privacy/page.tsx
++++ b/src/app/privacy/page.tsx
+@@ -1,6 +1,6 @@
+ import type { Metadata } from "next";
+ import { LegalShell } from "@/components/legal-shell";
+-export const metadata: Metadata = { title: "Privacy Notice | PartnerLedger" };
++export const metadata: Metadata = { title: "Privacy Notice | Allocira" };
+ export default function Privacy() {
+   return (
+     <LegalShell title="Privacy Notice" updated="22 November 2026">
+@@ -7,7 +7,7 @@
+       <section>
+         <h2>Who handles your information</h2>
+         <p>
+-          FlowFoundry AI Solutions operates PartnerLedger. Contact{" "}
++          FlowFoundry AI Solutions operates Allocira. Contact{" "}
+           <a href="mailto:info@flowfoundryai.in">info@flowfoundryai.in</a> with
+           privacy questions or requests.
+         </p>
+@@ -56,10 +56,10 @@
+         <p>
+           To access, correct or delete your information, withdraw consent, or
+           raise a concern, email{" "}
+-          <a href="mailto:info@flowfoundryai.in?subject=PartnerLedger%20privacy%20request">
++          <a href="mailto:info@flowfoundryai.in?subject=Allocira%20privacy%20request">
+             info@flowfoundryai.in
+           </a>{" "}
+-          from the address you used, with “PartnerLedger privacy request” in the
++          from the address you used, with “Allocira privacy request” in the
+           subject. We may verify your identity before changing records.
+         </p>
+       </section>
+diff --git a/src/app/terms/page.tsx b/src/app/terms/page.tsx
+--- a/src/app/terms/page.tsx
++++ b/src/app/terms/page.tsx
+@@ -1,6 +1,6 @@
+ import type { Metadata } from "next";
+ import { LegalShell } from "@/components/legal-shell";
+-export const metadata: Metadata = { title: "Terms of Use | PartnerLedger" };
++export const metadata: Metadata = { title: "Terms of Use | Allocira" };
+ export default function Terms() {
+   return (
+     <LegalShell title="Terms of Use" updated="22 November 2026">
+@@ -7,7 +7,7 @@
+       <section>
+         <h2>About this website</h2>
+         <p>
+-          PartnerLedger is an early-stage concept by FlowFoundry AI Solutions.
++          Allocira is an early-stage concept by FlowFoundry AI Solutions.
+           This site describes ideas and invites feedback. It does not provide
+           access to a live financial application. No launch date or future
+           feature is guaranteed.
+diff --git a/src/app/api/waitlist/route.ts b/src/app/api/waitlist/route.ts
+--- a/src/app/api/waitlist/route.ts
++++ b/src/app/api/waitlist/route.ts
+@@ -86,7 +86,7 @@
+   return NextResponse.json(
+     {
+       message:
+-        "You're on the list! Thank you for your interest in PartnerLedger. We'll share relevant updates as the concept develops.",
++        "You're on the list! Thank you for your interest in Allocira. We'll share relevant updates as the concept develops.",
+     },
+     { status: 201 },
+   );

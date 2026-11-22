@@ -1,0 +1,65 @@
+diff --git a/next.config.ts b/next.config.ts
+--- a/next.config.ts
++++ b/next.config.ts
+@@ -1,6 +1,7 @@
+ import type { NextConfig } from "next";
+ 
+ const nextConfig: NextConfig = {
++  devIndicators: false,
+   turbopack: { root: process.cwd() },
+   poweredByHeader: false,
+   async headers() {
+diff --git a/src/app/globals.css b/src/app/globals.css
+--- a/src/app/globals.css
++++ b/src/app/globals.css
+@@ -202,6 +202,9 @@
+   }
+ }
+ @media (prefers-reduced-motion: reduce) {
++  .scroll-reveal {
++    transform: none !important;
++  }
+   html {
+     scroll-behavior: auto;
+   }
+diff --git a/src/components/reveal.tsx b/src/components/reveal.tsx
+--- a/src/components/reveal.tsx
++++ b/src/components/reveal.tsx
+@@ -1,21 +1,20 @@
+ "use client";
+-import { motion, useReducedMotion } from "motion/react";
+-import { ReactNode } from "react";
+-export function Reveal({
+-  children,
+-  className = "",
+-  delay = 0,
+-}: {
+-  children: ReactNode;
+-  className?: string;
+-  delay?: number;
+-}) {
+-  const reduce = useReducedMotion();
+-  return (
+-    <motion.div
+-      className={className}
+-      initial={reduce ? false : { y: 12 }}
+-      whileInView={reduce ? undefined : { y: 0 }}
++import { motion } from "motion/react";
++import { ReactNode } from "react";
++export function Reveal({
++  children,
++  className = "",
++  delay = 0,
++}: {
++  children: ReactNode;
++  className?: string;
++  delay?: number;
++}) {
++  return (
++    <motion.div
++      className={`scroll-reveal ${className}`}
++      initial={{ y: 12 }}
++      whileInView={{ y: 0 }}
+       viewport={{ once: true, amount: 0.12 }}
+       transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+     >
