@@ -1,42 +1,113 @@
 # Allocira
 
-A pre-launch research site by FlowFoundry AI Solutions. The dashboard uses fictional data. The waitlist and feedback APIs write to separate private Supabase tables.
+**Every Share. Clearly Accounted For.**
 
-## Run locally
+**Allocira** is an early-stage product concept by **[FlowFoundry AI Solutions](https://flowfoundryai.in/)**. It explores a clearer way for small and growing law-firm LLPs to track financial activity, apply their own partner-allocation arrangements, and prepare transparent payout statements.
 
-Use Node.js 22 LTS or later. Run these commands from the directory containing this README.
+> **Status: Concept / Market Validation.** Allocira is not yet a launched product. The capabilities below are proposed and subject to feedback, feasibility, legal review, and development.
 
-```sh
-npm ci
-npm run dev
-```
+## The problem
 
-Open the local URL printed by Next.js. The page and concept dashboard work without credentials. Form submissions return a temporary-unavailability message until persistence is configured.
+Smaller law-firm LLPs may manage hours, invoices, collections, expenses, and partner allocations across spreadsheets, accounting software, and manual records. Arrangements can vary significantly by firm, making one fixed profit-sharing formula unsuitable.
 
-## Enable registrations
+Allocira aims to help firms work from documented rules and an auditable calculation process, without requiring them to replace existing accounting systems.
 
-1. Open your Supabase project and run `supabase/migrations/202611220001_initial.sql` once in SQL Editor, or apply it through Supabase migrations. Enable the Data API for the public schema. The migration enables row-level security, removes browser-role access, and grants the server role access to the two submission tables and rate-limit function.
-2. Create `.env.local` beside this README if it does not already exist. Use `.env.example` as a template. Set `SUPABASE_URL` or `NEXT_PUBLIC_SUPABASE_URL` to the project URL. Set `SUPABASE_SECRET_KEY` to a secret key from that same project (Settings → API Keys). A legacy service-role key in `SUPABASE_SERVICE_ROLE_KEY` also works. Keep the secret key server-side. Next.js does not load values from `.env.example`.
-3. Set `RATE_LIMIT_SECRET` to a fresh random value. Generate one locally with `node -e "console.log(require('node:crypto').randomBytes(32).toString('hex'))"`. Set `NEXT_PUBLIC_SITE_URL` to the actual origin, including the protocol and excluding a trailing slash.
-4. Restart the local server. In a staging project, register a test email with consent, then submit the same address in a different case. Check that a single row exists. Send feedback separately and verify that it creates only a feedback row.
-5. On Vercel, select this application directory as the project root, use the Next.js preset and add the same variables to the intended environment. Use a separate Supabase project for preview deployments. Run `npm run typecheck`, `npm test` and `npm run build` before deployment.
+## Proposed solution
 
-The forms enforce per-hour limits of 12 attempts per IP and five per normalised email, per form. Vercel supplies the client IP. Other hosts use a shared bucket until you configure an equivalent trusted proxy. Rate-limit identifiers are keyed hashes. As part of database maintenance, remove expired buckets using `delete from public.submission_rate_limits where window_start < now() - interval '1 day'`.
+A lightweight, configurable partner-finance workspace designed to help teams:
 
-Successful registrations are active with recorded consent. Confirmation email is optional and is disabled in this implementation. An existing or unsubscribed address never receives a new subscription through a duplicate POST.
+- **Track work and collections:** Record billable hours, invoices, receipts, and outstanding amounts.
+- **Manage expenses:** Capture shared overheads and matter- or partner-specific costs.
+- **Configure allocation rules:** Model the firm's documented remuneration, revenue-credit, and profit-sharing arrangements.
+- **Prepare draft payouts:** Calculate proposed partner allocations and adjustments for authorised review.
+- **Review and approve:** Record approvals, changes, and supporting explanations.
+- **Export reports:** Produce partner statements and data for reconciliation with a qualified accountant.
 
-## Private administration
+**Important accounting distinction:** Billable hours, invoiced fees, cash collected, remuneration, distributable profit, and actual partner payouts are different figures. Allocira should never treat them as automatically interchangeable.
 
-Sign into the Supabase dashboard with an authorised project account. Use SQL Editor to run individual queries in `supabase/admin-report.sql` for total registrations, daily counts, and distributions by role, firm size and challenge. Use the final query and the results panel's CSV export to download subscribers who currently consent to updates. For a full administrative export, select the table in Table Editor and export CSV. Import user-entered CSV columns as text in spreadsheets. Restrict exports to staff handling the research and delete local copies after use.
+## Who it is for
 
-Requests for access, correction, deletion and withdrawal go to info@flowfoundryai.in. Verify control of the registered address before accessing a record. Check both submissions tables, act only on the verified request, and reply privately. For withdrawal, set the waitlist status to `unsubscribed` and exclude it from all mailings. For deletion, delete matching records from the requested tables and remove corresponding exported copies. The privacy notice is at `/privacy`.
+- Managing partners of small law-firm LLPs
+- Partners responsible for financial allocations
+- Firm administrators and accounts teams
+- Accountants and advisers who support LLPs
 
-## Verification
+Although the initial research is focused on law firms, the underlying workflow may be useful to other professional-services partnerships after validation.
 
-Run `npm test` for schema checks. After `npm run build`, run `node --test tests/api.integration.mjs` to exercise the production HTTP routes against an isolated PostgREST fixture. Use the staging signup check above to verify your own Supabase configuration.
+## Product principles
 
-## Implementation
+1. **Firm-specific rules:** No assumption that all LLPs share profits in the same way.
+2. **Explainable calculations:** Every proposed allocation should show inputs and the rule applied.
+3. **Human approval:** Payouts remain drafts until an authorised person reviews them.
+4. **Auditability:** Preserve records of adjustments, approvals, and relevant rule versions.
+5. **Interoperability:** Prefer useful integrations and exports over replacing every existing tool.
+6. **Security by design:** Apply least-privilege access, careful handling of financial data, and appropriate retention controls.
 
-The App Router serves the landing page, privacy notice, terms and POST endpoints. React Hook Form and Zod share validation between the browser and server. SQL unique indexes prevent duplicate subscribers during concurrent requests. Consent timestamps and notice versions are recorded on the server. No public API lists or exports personal information.
+## Planned website and early-access waitlist
 
-Photograph sources are documented in `public/images/CREDITS.md`.
+The first public milestone is a **pre-launch landing page**, not a production accounting application. The planned site will include:
+
+- Home, About, Problem, Features, How It Works, FAQ, Contact, and footer sections
+- Illustrative dashboard concepts clearly labelled as previews
+- A waitlist form to gather interest and understand prospective users' challenges
+- Privacy notice and informed consent for follow-up communications
+- Protected storage, input validation, duplicate handling, anti-spam measures, and administrative access controls
+
+A waitlist registration **does not** imply a product is available or that acceptance into a pilot is guaranteed.
+
+## Proposed technology stack
+
+| Layer | Candidate technology |
+| --- | --- |
+| Web app | Next.js, React, TypeScript |
+| UI | Tailwind CSS, shadcn/ui |
+| Data | PostgreSQL / Supabase |
+| Validation | Zod |
+| Backend | Next.js route handlers or server actions |
+| Deployment | Vercel |
+| Future integrations | Existing accounting and practice-management tools, where supported |
+
+These are **design intentions**, not claims about code already implemented in this repository. Final selections may change.
+
+## Roadmap
+
+- [ ] Interview managing partners and accounts professionals at small LLPs
+- [ ] Collect anonymised examples of real allocation and payout workflows
+- [ ] Validate whether firms would pay for a dedicated solution
+- [ ] Launch the pre-release landing page and working waitlist
+- [ ] Prototype a rule-based payout calculator with fictional data
+- [ ] Review calculation correctness with accounting and legal professionals
+- [ ] Run a narrowly scoped pilot with a willing firm
+- [ ] Evaluate integrations, reporting, and broader SaaS development
+
+## Validation questions
+
+We're especially interested in learning:
+
+1. How are partner remuneration, revenue credit, expenses, and profit-sharing determined today?
+2. Which parts of the monthly reconciliation process are slow or error-prone?
+3. Which existing tools are already working well, and what is missing?
+4. Who approves calculations and payouts?
+5. Would a dedicated workflow solve a problem significant enough to justify paying for it?
+
+Please **do not share confidential client matters, real financial records, or partner agreements** through an unsecured public channel. Use fictional or appropriately anonymised examples when discussing the concept.
+
+## Privacy, security, and professional boundaries
+
+Allocira is envisioned as **financial workflow assistance**, not a substitute for professional accounting, legal, or tax advice. The applicable LLP agreement, accounting policies, and authorised partner decisions should govern any calculations. A future implementation will require data protection assessment, secure access controls, testing, and professional review before it handles real firm data.
+
+The planned waitlist should collect only necessary registration and product-feedback information. Financial records and client documents are **not** required to join the waitlist.
+
+## Project ownership and contact
+
+Developed as a product initiative of **FlowFoundry AI Solutions**.
+
+- Website: [flowfoundryai.in](https://flowfoundryai.in/)
+- Email: [info@flowfoundryai.in](mailto:info@flowfoundryai.in)
+- Repository: [github.com/flowfoundryai26/allocira](https://github.com/flowfoundryai26/allocira)
+
+For discovery conversations, product feedback, or potential pilot interest, contact us by email.
+
+## License
+
+No open-source license has been declared for this project. Do not assume permission to reuse, modify, or redistribute the code beyond rights permitted by law unless a license is added by the project owner.
